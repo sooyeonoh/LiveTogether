@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import LogInPanel from "./components/LogInPanel";
 import SignIn from "./components/SignIn";
@@ -13,6 +13,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/" component={LogInPanel} />
+          <Route path="/signout" component={LogInPanel} />
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           <Route exact path="/dashboard" component={Dashboard} />

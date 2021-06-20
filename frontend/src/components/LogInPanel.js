@@ -7,12 +7,12 @@ import "../css/LogInPanel.css"
 function LogInPanel(props) {
 
     return (
-        <div className="container">
-            <Button className="btn" href="/signin" onClick={props.triggerHide} variant="dark" size="lg">
+        <div className="center-container">
+            <Button className="btn-small" href="/signin" onClick={props.triggerHide} variant="dark" size="lg">
                 <TelegramIcon className="btn-icon"/>
                 Sign In
               </Button>
-              <Button className="btn" href="/signup" onClick={props.triggerHide} variant="dark" size="lg">
+              <Button className="btn-small" href="/signup" onClick={props.triggerHide} variant="dark" size="lg">
                   <PersonAddIcon className="btn-icon"/>
                   Sign Up
               </Button>

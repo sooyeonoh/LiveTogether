@@ -8,7 +8,15 @@ const userSchema = new mongoose.Schema ({
     email: String,
     username: String,
     password: String,
-    googleId: String
+    googleId: String,
+    roommates: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    tasks: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Task'
+    }]
 });
 
 userSchema.plugin(passportLocalMongoose);

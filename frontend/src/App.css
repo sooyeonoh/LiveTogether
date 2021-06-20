@@ -1,7 +1,64 @@
-.App {
+body, .App, .App>div {
+  height: 100vh
+}
+
+.text-center-align {
   text-align: center;
-  background-color: #fefbe9;
+}
+
+.main-padding {
+  height: 100%;
+  padding: 50px 125px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
+.center-container {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.margin-small {
+  margin: 8px;
+}
+
+.margin-top {
+  margin-top: 20px;
+}
+
+.margin-bottom {
+  margin-bottom: 20px;
+}
+
+.margin-left {
+  margin-left: 20px;
+}
+
+.margin-right {
+  margin-right: 20px;
+}
+
+.card-padding {
+  padding: 35px;
+}
+
+.border-radius {
+  border-radius: 12px;
 }

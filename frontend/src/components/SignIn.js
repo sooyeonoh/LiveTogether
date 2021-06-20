@@ -43,6 +43,7 @@ function SignIn(props) {
         .then(res => {
           if (res.data._id) {
             console.log("User ID is: " + res.data._id);
+            localStorage.setItem("user", res.data);
             console.log("Redirecting to dashboard");
             props.history.push("/dashboard/" + res.data._id);
           }
@@ -54,8 +55,8 @@ function SignIn(props) {
     }
 
     return (
-      <div>
-        <Form className="form" onSubmit={handleSubmit} >
+      <div className="center-container text-center-align">
+        <Form className="form card-padding border-radius" onSubmit={handleSubmit} >
             <h1>Sign In</h1>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control onChange={handleChange} type="email" name="email" value={profile.email} placeholder="Email address" />
@@ -63,7 +64,7 @@ function SignIn(props) {
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control onChange={handleChange} type="password" name="password" value={profile.password} placeholder="Password" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button className="margin-bottom" variant="primary" type="submit">
                 Submit
             </Button>
             <GoogleButton/>
