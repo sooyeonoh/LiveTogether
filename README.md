@@ -1,2 +1,2 @@
-# recipe-app
-A web-app designed to assist with easier recipe building and grocery shopping
+# Coop
+A web-app designed to make living with roommates easier
