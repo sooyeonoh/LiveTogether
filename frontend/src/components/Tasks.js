@@ -46,7 +46,6 @@ function Tasks(props) {
     function addTask(event) {
         event.preventDefault();
         axios.post("http://localhost:5000/addTask", newTask, config).then(res => {
-            console.log("Client received the task list: " + res.data)
             setTaskList(prevList => [...prevList, res.data]);
             console.log("Successfully added task")
         }).catch(err => {
@@ -61,7 +60,13 @@ function Tasks(props) {
     }
 
     function removeTask() {
-        setTaskList(taskList.filter(item => !item.completed));
+        const completedTask = taskList.find(item => item.completed);
+        axios.post("http://localhost:5000/removeTask", completedTask, config).then(res => {
+            setTaskList(taskList.filter(item => !item.completed));
+            console.log(res.data.message);
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     function showInput() {
