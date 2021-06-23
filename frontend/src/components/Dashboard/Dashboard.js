@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import NavBar from './NavBar';
+import axiosConfig from "../../axiosConfig";
+import NavBar from '../NavBar';
 import Roommates from './Roommates';
 import Tasks from './Tasks';
 import { Container, Jumbotron, Button, Row, Col } from "react-bootstrap";
 
 function Dashboard(props) {
+
     const userID = props.match.params.id;
     const [user, setUser] = useState({
         fName: "",
@@ -19,7 +21,7 @@ function Dashboard(props) {
 
     useEffect(() => {
         const fetch = () => {
-        axios.get("http://localhost:5000/dashboard/" + userID, {withCredentials: true}).then(res => {
+        axios.get("http://localhost:5000/dashboard/" + userID, axiosConfig).then(res => {
             setUser(res.data);
             console.log("Found user: " + res.data.fName);
         }).catch((error) => {
@@ -32,7 +34,7 @@ function Dashboard(props) {
 
     return (
         <div>
-            <NavBar history={props.history}/>
+            <NavBar userID={userID} history={props.history}/>
             <div className="main-padding">
                 <Jumbotron style={{backgroundColor: "lightgray"}} className="flex space-between card-padding border-radius">
                     <div>

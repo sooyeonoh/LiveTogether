@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from "react-bootstrap";
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import TelegramIcon from '@material-ui/icons/Telegram';
-import "../css/LogInPanel.css"
+import "../../css/LogInPanel.css"
 
 function LogInPanel(props) {
 

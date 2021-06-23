@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Form, Button, Row, Col } from "react-bootstrap";
 import GoogleButton from './GoogleButton';
 import axios from "axios";
-import "../css/SignIn.css";
+import axiosConfig from "../../axiosConfig";
+import "../../css/SignIn.css";
 
 function SignUp(props) {
 
@@ -57,7 +58,7 @@ function SignUp(props) {
         password: profile.password
       }
 
-      axios.post('http://localhost:5000/signup', user, {withCredentials: true})
+      axios.post('http://localhost:5000/signup', user, axiosConfig)
         .then((res) => {
             if (res.data._id) {
               console.log("Redirecting to dashboard for user ID: " + res.data._id);

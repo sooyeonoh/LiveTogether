@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import axiosConfig from "../../axiosConfig";
 import GoogleButton from "./GoogleButton";
-import "../css/SignIn.css";
+import "../../css/SignIn.css";
 
 function SignIn(props) {
 
@@ -39,7 +40,7 @@ function SignIn(props) {
         password: profile.password
       }
 
-      axios.post('http://localhost:5000/signin', user, {withCredentials: true})
+      axios.post('http://localhost:5000/signin', user, axiosConfig)
         .then(res => {
           if (res.data._id) {
             console.log("User ID is: " + res.data._id);

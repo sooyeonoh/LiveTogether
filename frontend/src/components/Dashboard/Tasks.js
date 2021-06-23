@@ -1,18 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { Card, Form, Row, Col, ListGroup, Button } from "react-bootstrap";
 import axios from "axios";
+import axiosConfig from "../../axiosConfig";
 import TaskItem from "./TaskItem";
 
 function Tasks(props) {
-
-    const config = {
-        withCredentials: true
-    };
-
-    const [addToggle, setAddToggle] = useState({
-        add: false,
-        button: '+'
-    });
 
     const [newTask, setNewTask] = useState({
         task: "",
@@ -20,6 +12,14 @@ function Tasks(props) {
         username: -1
     });
     const [taskList, setTaskList] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:5000/getTasks", axiosConfig).then(res => {
+            setTaskList(res.data)
+        }).catch(err => {
+            console.log(err);
+        })
+    }, []);
 
     function handleChange(event) {
         setNewTask({
@@ -29,23 +29,9 @@ function Tasks(props) {
         });
     }
 
-    function toggleAdd() {
-        setAddToggle({
-            add: !addToggle.add, 
-            button: addToggle.button === '+' ? '-' : '+'});
-    }
-
-    useEffect(() => {
-        axios.get("http://localhost:5000/getTasks", config).then(res => {
-            setTaskList(res.data)
-        }).catch(err => {
-            console.log(err);
-        })
-    }, []);
-
     function addTask(event) {
         event.preventDefault();
-        axios.post("http://localhost:5000/addTask", newTask, config).then(res => {
+        axios.post("http://localhost:5000/addTask", newTask, axiosConfig).then(res => {
             setTaskList(prevList => [...prevList, res.data]);
             console.log("Successfully added task")
         }).catch(err => {
@@ -61,12 +47,23 @@ function Tasks(props) {
 
     function removeTask() {
         const completedTask = taskList.find(item => item.completed);
-        axios.post("http://localhost:5000/removeTask", completedTask, config).then(res => {
+        axios.post("http://localhost:5000/removeTask", completedTask, axiosConfig).then(res => {
             setTaskList(taskList.filter(item => !item.completed));
             console.log(res.data.message);
         }).catch(err => {
             console.log(err);
         })
+    }
+
+    const [addToggle, setAddToggle] = useState({
+        add: false,
+        button: '+'
+    });
+
+    function toggleAdd() {
+        setAddToggle({
+            add: !addToggle.add, 
+            button: addToggle.button === '+' ? '-' : '+'});
     }
 
     function showInput() {

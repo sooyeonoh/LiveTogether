@@ -8,7 +8,6 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const database = require('./database/db');
 const User = require("./models/user-schema");
-const Task = require("./models/task-schema");
 
 const PORT = process.env.PORT || 5000;
 
@@ -41,12 +40,13 @@ app.use(cookieParser("Thisisasecretstring."));
 
 app.use(passport.initialize());
 app.use(passport.session());
-require("./passportConfig")(passport);
+require("./configurations/passportConfig")(passport);
 
 // ------------------------------------ ROUTES ------------------------------------
 
 require("./routes/authentication")(app);
 require("./routes/tasks")(app);
+require("./routes/roommates")(app);
 
 app.get("/dashboard/:id", (req, res) => {
   const userID = req.params.id;

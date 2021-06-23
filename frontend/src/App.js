@@ -3,10 +3,10 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Switch } from "react-router-dom";
 
-import LogInPanel from "./components/LogInPanel";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
-import Dashboard from "./components/Dashboard";
+import LogInPanel from "./components/Authentication/LogInPanel";
+import SignIn from "./components/Authentication/SignIn";
+import SignUp from "./components/Authentication/SignUp";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   return (

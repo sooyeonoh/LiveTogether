@@ -1,4 +1,4 @@
-const User = require("./models/user-schema");
+const User = require("../models/user-schema");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 module.exports = function(passport) {

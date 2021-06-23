@@ -5,10 +5,10 @@ module.exports = function(app){
 
     app.get("/getTasks", (req, res) => {
         User.findById(req.session.user._id, (err, user) => {
-        console.log("Getting tasks for user")
-        Task.find({ _id: { $in: user.tasks } }, (err, foundTasks) => {
-            res.send(foundTasks);
-        });
+            console.log("Getting tasks for user")
+            Task.find({ _id: { $in: user.tasks } }, (err, foundTasks) => {
+                if (foundTasks) { res.send(foundTasks) }
+            });
         })
     })
 
