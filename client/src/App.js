@@ -7,6 +7,7 @@ import LogInPanel from "./components/Authentication/LogInPanel";
 import SignIn from "./components/Authentication/SignIn";
 import SignUp from "./components/Authentication/SignUp";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Groceries from "./components/Groceries/Groceries";
 
 function App() {
   return (
@@ -16,10 +17,8 @@ function App() {
           <Route path="/signout" component={LogInPanel} />
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
-          <Route exact path="/dashboard" component={Dashboard} />
           <Route path="/dashboard/:id" component={Dashboard} />
-          <Route exact path="/auth/google/dashboard" component={Dashboard} />
-          <Route path="/auth/google/dashboard/:id" component={Dashboard} />
+          <Route path="/groceries/:id" component={Groceries} />
         </Switch>
       </div>
   )

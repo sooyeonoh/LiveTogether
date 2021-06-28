@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema ({
     username: String,
     password: String,
     googleId: String,
+    home: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Home'
+    },
     roommates: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

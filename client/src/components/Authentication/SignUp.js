@@ -62,7 +62,7 @@ function SignUp(props) {
         .then((res) => {
             if (res.data._id) {
               console.log("Redirecting to dashboard for user ID: " + res.data._id);
-              props.history.push("/dashboard/:" + res.data._id);
+              props.history.push("/dashboard/" + res.data._id);
           }
         }).catch((error) => {
             console.log(error)

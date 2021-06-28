@@ -10,8 +10,8 @@ function NavBar(props) {
             <Navbar.Brand href={"/dashboard/" + props.userID}>Coop</Navbar.Brand>
             <Nav className="me-auto">
                 <Nav.Link href={"/dashboard/" + props.userID}>Home</Nav.Link>
-                <Nav.Link href="/dashboard/groceries/:id">Groceries</Nav.Link>
-                <Nav.Link href="/dashboard/messages/:id">Messages</Nav.Link>
+                <Nav.Link href={"/groceries/" + props.userID}>Groceries</Nav.Link>
+                <Nav.Link href={"/messages/" + props.userID}>Messages</Nav.Link>
                 <SignOut history={props.history}/>
             </Nav>
             </Container>

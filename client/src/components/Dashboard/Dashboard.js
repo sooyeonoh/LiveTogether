@@ -21,6 +21,7 @@ function Dashboard(props) {
 
     useEffect(() => {
         const fetch = () => {
+        console.log(userID);
         axios.get("http://localhost:5000/dashboard/" + userID, axiosConfig).then(res => {
             setUser(res.data);
             console.log("Found user: " + res.data.fName);
