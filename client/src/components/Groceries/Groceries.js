@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import SearchBar from './SearchBar';
+import NavBar from '../NavBar';
+import Search from './Search';
+import GroceryList from './GroceryList';
 import axios from 'axios';
 import axiosConfig from "../../axiosConfig";
-import NavBar from '../NavBar';
 
 function Groceries(props) {
 
@@ -26,7 +27,11 @@ function Groceries(props) {
     return (
         <div>
             <NavBar userID={userID} history={props.history}/>
-            <SearchBar/>
+            <div className="main-padding d-flex justify-content-center align-items-start" >
+                <Search />
+            </div>
+            <GroceryList groceries={groceries} />
+
         </div>
     );
 }
