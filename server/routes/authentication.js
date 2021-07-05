@@ -52,19 +52,19 @@ module.exports = function(app){
         res.send({ message: "Logging out" });
     })
 
-    app.post("/signup", (req, res) => {
+    app.post("/signup", (req, res, next) => {
     const newUser = new User({ fName: req.body.fName, lName: req.body.lName, email: req.body.email, username: req.body.email, password: req.body.password, roommates:[], tasks: [] });
     User.register(newUser, req.body.password, (err, user) => {
         if (err) {
             console.log(err);
         } else {
-            const newHome = new Home({users: [newUser], groceries: [] })
+            const newHome = new Home({users: [user], groceries: [] })
             newHome.save();
-            user.home = newHome;
-            user.save();
             passport.authenticate("local", (err, user, info) => {
                 if (err) { 
                     return next(err); 
+                } else if (!user) { 
+                    return res.send("Email is already associated with a user."); 
                 }
                 req.logIn(user, function(err) {
                     if (err) { return next(err); }
@@ -74,7 +74,7 @@ module.exports = function(app){
                         res.send(user);
                     }
                 });
-            })
+            })(req, res, next);
         }
     })
     });

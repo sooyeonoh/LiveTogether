@@ -52,7 +52,7 @@ require("./routes/roommates")(app);
 app.get("/dashboard/:id", (req, res) => {
   const userID = req.params.id;
   console.log('Loading dashboard for ID:', userID);
-  User.findById(userID, function (err, user) {
+  User.findById(userID, (err, user) => {
       if (err) {
         console.log(err);
       } else if (!user) {
@@ -74,9 +74,8 @@ app.get("/getTasks", (req, res) => {
 
 app.get("/groceries/:id", (req, res) => {
   const userID = req.params.id;
-  console.log("Loading groceries for ID: ", userID);
-  var id = mongoose.Types.ObjectId(userID);
-  Home.findOne({'users': id}, (err, home) => {
+  console.log("Loading groceries for ID:", userID);
+  Home.findOne({users: mongoose.Types.ObjectId(userID)}, (err, home) => {
       if (err) {
         console.log(err);
       } else if (!home) {
