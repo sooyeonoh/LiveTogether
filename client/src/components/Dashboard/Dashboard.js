@@ -21,7 +21,6 @@ function Dashboard(props) {
 
     useEffect(() => {
         const fetch = () => {
-        console.log(userID);
         axios.get("http://localhost:5000/dashboard/" + userID, axiosConfig).then(res => {
             setUser(res.data);
             console.log("Found user: " + res.data.fName);
@@ -37,19 +36,17 @@ function Dashboard(props) {
         <div>
             <NavBar userID={userID} history={props.history}/>
             <div className="main-padding">
-                <Jumbotron style={{backgroundColor: "lightgray"}} className="flex space-between card-padding border-radius">
+                <Jumbotron style={{backgroundColor: "lightgray"}} className="d-flex justify-content-between align-items-center card-padding rounded">
                     <div>
                         <h1>Welcome back, {user.fName}</h1>
                         <p style={{fontSize: '18px', margin: '0'}}>
                             Today is {days[today.getDay()]}, {months[today.getMonth()]} {today.getDate()}
                         </p>
                     </div>
-                    <p>
-                        <Button variant="primary">See today's updates</Button>
-                    </p>
+                    <Button variant="primary">See today's updates</Button>
                 </Jumbotron>
                 <Container fluid>
-                    <Row className="flex space-around wrap">
+                    <Row className="d-flex justify-content-around flex-wrap">
                         <Col><Roommates/></Col>
                         <Col><Tasks/></Col>
                     </Row>

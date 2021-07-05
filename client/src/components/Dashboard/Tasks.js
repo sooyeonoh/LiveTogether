@@ -68,10 +68,10 @@ function Tasks(props) {
 
     function showInput() {
         return (
-            <Form onSubmit={addTask}>
+            <Form onSubmit={addTask} className="mt-2">
                 <Row>
                     <Col>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Group className="mb-2" controlId="formBasicEmail">
                             <Form.Control onChange={handleChange} type="text" name="task" value={newTask.task} placeholder="Enter task" />
                         </Form.Group>
                     </Col>
@@ -86,22 +86,20 @@ function Tasks(props) {
     }
 
     return (
-        <div>
-            <Card className="text-center-align margin-top margin-left">
-                <Card.Header><h5>Upcoming Tasks</h5></Card.Header>
-                <ListGroup variant="flush">
-                    {taskList.map(t => {
-                        return (
-                            <TaskItem taskItem={t} key={taskList.indexOf(t)} remove={removeTask}/>
-                        )
-                    })}
-                    <ListGroup.Item>
-                            {addToggle.add && showInput()}
-                            <Button onClick={toggleAdd} variant="outline-secondary" className="border-radius margin-small">{addToggle.button}</Button>
-                        </ListGroup.Item>
-                </ListGroup>
-            </Card>
-        </div>
+        <Card className="text-center rounded mt-4 mr-4">
+            <Card.Header><h5>Upcoming Tasks</h5></Card.Header>
+            <ListGroup variant="flush">
+                {taskList.map(t => {
+                    return (
+                        <TaskItem taskItem={t} key={taskList.indexOf(t)} remove={removeTask}/>
+                    )
+                })}
+                <ListGroup.Item>
+                        {addToggle.add && showInput()}
+                        <Button onClick={toggleAdd} variant="outline-secondary" className="rounded m-1">{addToggle.button}</Button>
+                    </ListGroup.Item>
+            </ListGroup>
+        </Card>
     );
 }
 

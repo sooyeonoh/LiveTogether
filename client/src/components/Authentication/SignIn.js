@@ -56,7 +56,7 @@ function SignIn(props) {
     }
 
     return (
-      <div className="center-container text-center-align">
+      <div className="full-height d-flex justify-content-center align-items-center text-center">
         <Form className="form card-padding border-radius" onSubmit={handleSubmit} >
             <h1>Sign In</h1>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -65,7 +65,7 @@ function SignIn(props) {
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control onChange={handleChange} type="password" name="password" value={profile.password} placeholder="Password" />
             </Form.Group>
-            <Button className="margin-bottom" variant="primary" type="submit">
+            <Button className="mb-5" variant="primary" type="submit">
                 Submit
             </Button>
             <GoogleButton/>

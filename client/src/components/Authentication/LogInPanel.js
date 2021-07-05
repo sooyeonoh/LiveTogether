@@ -7,7 +7,7 @@ import "../../css/LogInPanel.css"
 function LogInPanel(props) {
 
     return (
-        <div className="center-container">
+        <div className="full-height d-flex justify-content-center align-items-center">
             <Button className="btn-small" href="/signin" onClick={props.triggerHide} variant="dark" size="lg">
                 <TelegramIcon className="btn-icon"/>
                 Sign In

@@ -12,9 +12,9 @@ function TaskItem(props) {
 
     return (
         <div>
-            <ListGroup.Item style={{ textAlign: 'left' }}>
-                {props.taskItem.completed ? <CheckBoxIcon className="margin-small"/>
-                : <CheckBoxOutlineBlankIcon onClick={markComplete} className="margin-small"/>
+            <ListGroup.Item className="text-left">
+                {props.taskItem.completed ? <CheckBoxIcon className="m-1"/>
+                : <CheckBoxOutlineBlankIcon onClick={markComplete} className="m-1"/>
                 }
                 {props.taskItem.task}
             </ListGroup.Item>

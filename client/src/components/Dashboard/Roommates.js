@@ -59,10 +59,10 @@ function Roommates(props) {
 
     function showInput() {
         return (
-            <Form onSubmit={addRoommate}>
+            <Form onSubmit={addRoommate} className="mt-2">
                 <Row>
                     <Col>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Group className="mb-2" controlId="formBasicEmail">
                             <Form.Control onChange={handleChange} type="email" name="email" value={roommate.email} placeholder="Enter email address" />
                         </Form.Group>
                     </Col>
@@ -77,23 +77,20 @@ function Roommates(props) {
     }
 
     return (
-        <div>
-            <Card className="text-center-align border-radius margin-top margin-right">
-                <Card.Header><h5>Your roommates</h5></Card.Header>
-                <ListGroup variant="flush">
-                    {roommateList.map(r => {
-                        return (
-                            <RoommateItem roommateItem={r} key={roommateList.indexOf(r)} />
-                        )
-                    })}
-                    <ListGroup.Item>
-                        <Button onClick={toggleAdd} variant="outline-secondary" className="border-radius margin-small">{addToggle.button}</Button>
-                        {addToggle.add && showInput()}
-                        
-                    </ListGroup.Item>
-                </ListGroup>
-            </Card>
-        </div>
+        <Card className="text-center rounded mt-4 mr-4">
+            <Card.Header><h5>Your roommates</h5></Card.Header>
+            <ListGroup variant="flush">
+                {roommateList.map(r => {
+                    return (
+                        <RoommateItem roommateItem={r} key={roommateList.indexOf(r)} />
+                    )
+                })}
+                <ListGroup.Item>
+                    {addToggle.add && showInput()}
+                    <Button onClick={toggleAdd} variant="outline-secondary" className="rounded m-1">{addToggle.button}</Button>
+                </ListGroup.Item>
+            </ListGroup>
+        </Card>
     );
 }
 
