@@ -7,7 +7,11 @@ const homeSchema = new mongoose.Schema ({
         type: mongoose.Types.ObjectId,
         ref: 'User'
     }],
-    groceries: [String]
+    groceries: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Grocery'
+    }],
+    username: String
 });
 
 homeSchema.plugin(passportLocalMongoose);
