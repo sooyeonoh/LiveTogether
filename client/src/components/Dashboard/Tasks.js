@@ -89,11 +89,9 @@ function Tasks(props) {
         <Card className="text-center rounded mt-4 mr-4">
             <Card.Header><h5>Upcoming Tasks</h5></Card.Header>
             <ListGroup variant="flush">
-                {taskList.map(t => {
-                    return (
-                        <TaskItem taskItem={t} key={taskList.indexOf(t)} remove={removeTask}/>
-                    )
-                })}
+                {taskList.map(t => 
+                    <TaskItem taskItem={t} key={taskList.indexOf(t)} remove={removeTask}/>
+                )}
                 <ListGroup.Item>
                         {addToggle.add && showInput()}
                         <Button onClick={toggleAdd} variant="outline-secondary" className="rounded m-1">{addToggle.button}</Button>
