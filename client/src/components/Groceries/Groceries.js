@@ -15,8 +15,6 @@ function Groceries(props) {
         const fetch = () => {
             axios.get("http://localhost:5000/groceries/" + userID, axiosConfig).then(res => {
                 setGroceries(res.data);
-                console.log("Found groceries");
-                console.log(res.data);
             }).catch((error) => {
                 console.log(error)
             });
@@ -25,13 +23,12 @@ function Groceries(props) {
     }, [userID]);
 
     return (
-        <div>
+        <div className="view">
             <NavBar userID={userID} history={props.history}/>
             <div className="main-padding d-flex justify-content-center align-items-start" >
                 <Search />
+                <GroceryList groceries={groceries} />
             </div>
-            <GroceryList groceries={groceries} />
-
         </div>
     );
 }

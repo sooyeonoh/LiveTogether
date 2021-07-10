@@ -48,6 +48,7 @@ require("./configurations/passportConfig")(passport);
 require("./routes/authentication")(app);
 require("./routes/tasks")(app);
 require("./routes/roommates")(app);
+require("./routes/grocery")(app);
 
 app.get("/dashboard/:id", (req, res) => {
   const userID = req.params.id;

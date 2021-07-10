@@ -15,7 +15,8 @@ function Search(props) {
         setSearch(item);
         const params = new URLSearchParams({
             query: search,
-            number: numResults / 2
+            number: numResults / 2,
+            metaInformation: true
         });
         axios.get("https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=" + apiKey + '&' + params).then(res => {
             setResults(res.data);
@@ -30,12 +31,10 @@ function Search(props) {
         });
         axios.get("https://api.spoonacular.com/food/ingredients/search?apiKey=" + apiKey + '&' + params).then(res => {
             setResults(res.data.results);
-            console.log(res.data.results);
         })
     }
 
     function showResults() {
-        console.log(results);
         return (
             <ListGroup>
                 {Array.from(results).map(item => {
@@ -62,7 +61,7 @@ function Search(props) {
                     <Button variant="outline-secondary" onClick={doSearch}>Search</Button>
                 </InputGroup>
             </form>
-            {results !== [] && showResults()}
+            {search !== "" && results !== [] && showResults()}
         </div>
         
     );
