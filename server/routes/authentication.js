@@ -58,8 +58,6 @@ module.exports = function(app){
         if (err) {
             console.log(err);
         } else {
-            const newHome = new Home({users: [user], groceries: [] })
-            newHome.save();
             passport.authenticate("local", (err, user, info) => {
                 if (err) { 
                     return next(err); 
@@ -70,6 +68,8 @@ module.exports = function(app){
                     if (err) { return next(err); }
                     else {
                         req.session.user = req.user;
+                        const newHome = new Home({users: [user], groceries: [], username: user._id })
+                        newHome.save();
                         console.log("User authenticated from /signup");
                         res.send(user);
                     }

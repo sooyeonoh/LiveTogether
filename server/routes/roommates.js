@@ -1,6 +1,7 @@
 module.exports = function(app){
 
     const User = require("../models/user-schema");
+    const Home = require("../models/home-schema");
 
     app.get("/getRoommates", (req, res) => {
         User.findById(req.session.user._id, (err, user) => {
@@ -14,16 +15,18 @@ module.exports = function(app){
 
     app.post("/addRoommate", (req, res) => {
         const roommateEmail = req.body.email;
-        User.findById(req.session.user._id, (err, user) => {
+        var userID = req.session.user._id;
+        User.findById(userID, (err, user) => {
             User.findOne({email: roommateEmail}, (err, roommate) => {
-                user.roommates.push(roommate);
-                user.save();
-                roommate.roommates.push(user);
-                roommate.save();
-                console.log("Adding roommate: " + roommate.fName);
-                Home.findOneAndUpdate({users:{$elemMatch:{_id: userID}}}, { "$push": { "users": roommate } }, (err, home) => {
+                Home.findOneAndUpdate({"users": {$elemMatch: {_id: userID}}}, { "$push": { "users": roommate } }, (err, home) => {
                     if (!home) {
                         console.log("Home not found for user");
+                    } else {
+                        user.roommates.push(roommate);
+                        user.save();
+                        roommate.roommates.push(user);
+                        roommate.save();
+                        console.log("Adding roommate: " + roommate.fName);
                     }
                 });
                 Home.findOneAndDelete({users:{$elemMatch:{_id: roommate._id}}});
