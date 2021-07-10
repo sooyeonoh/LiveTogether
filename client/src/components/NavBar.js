@@ -5,16 +5,16 @@ import SignOut from "./Authentication/SignOut";
 function NavBar(props) {
 
     return (
-        <Navbar bg="dark" variant="dark">
-            <Container>
-            <Navbar.Brand href={"/dashboard/" + props.userID}>Coop</Navbar.Brand>
-            <Nav className="me-auto">
-                <Nav.Link href={"/dashboard/" + props.userID}>Home</Nav.Link>
-                <Nav.Link href={"/groceries/" + props.userID}>Groceries</Nav.Link>
-                <Nav.Link href={"/messages/" + props.userID}>Messages</Nav.Link>
+        <Navbar className="d-flex flex-column align-items-center justify-content-start" id="navbar" bg="dark" variant="dark">
+
+            <Navbar.Brand className="m-0 mt-5 mb-5" href={"/dashboard/" + props.userID}>LiveTogether</Navbar.Brand>
+            <Nav className="w-100 d-flex flex-column align-items-center justify-content-center">
+                <Nav.Link className="navlink" href={"/dashboard/" + props.userID}>Home</Nav.Link>
+                <Nav.Link className="navlink" href={"/groceries/" + props.userID}>Groceries</Nav.Link>
+                <Nav.Link className="navlink" href={"/messages/" + props.userID}>Messages</Nav.Link>
                 <SignOut history={props.history}/>
             </Nav>
-            </Container>
+
         </Navbar>
     );
 }

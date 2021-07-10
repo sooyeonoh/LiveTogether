@@ -33,7 +33,7 @@ function Dashboard(props) {
   }, [userID]);
 
     return (
-        <div>
+        <div className="view">
             <NavBar userID={userID} history={props.history}/>
             <div className="main-padding">
                 <Jumbotron style={{backgroundColor: "lightgray"}} className="d-flex justify-content-between align-items-center card-padding rounded">
