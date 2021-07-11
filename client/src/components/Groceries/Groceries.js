@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { ListGroup } from 'react-bootstrap';
 import NavBar from '../NavBar';
 import Search from './Search';
 import GroceryList from './GroceryList';
+import GroceryItem from './GroceryItem';
 import axios from 'axios';
 import axiosConfig from "../../axiosConfig";
 
@@ -15,6 +17,7 @@ function Groceries(props) {
         const fetch = () => {
             axios.get("http://localhost:5000/groceries/" + userID, axiosConfig).then(res => {
                 setGroceries(res.data);
+                console.log(res.data);
             }).catch((error) => {
                 console.log(error)
             });
@@ -22,12 +25,22 @@ function Groceries(props) {
         fetch();
     }, [userID]);
 
+    function addToGroceryList(grocery) {
+        setGroceries([...groceries, grocery])
+    }
+
     return (
+        
         <div className="view">
             <NavBar userID={userID} history={props.history}/>
-            <div className="main-padding d-flex justify-content-center align-items-start" >
-                <Search />
-                <GroceryList groceries={groceries} />
+            <div className="main-padding d-flex justify-content-between align-items-start" >
+                <Search showAddedGrocery={addToGroceryList}/>
+                <div className='w-100 h-100 rounded' style={{marginLeft: '2em', backgroundColor: "white", padding: '35px'}}>
+                    <h3>Your Groceries</h3>
+                    {groceries.map(g => 
+                        <GroceryItem groceryItem={g} key={groceries.indexOf(g)} />
+                    )}
+                </div>
             </div>
         </div>
     );

@@ -3,6 +3,7 @@ import SearchItem from './SearchItem';
 import { ListGroup, InputGroup, FormControl, Button } from "react-bootstrap";
 import SearchIcon from '@material-ui/icons/Search';
 import axios from "axios";
+import axiosConfig from "../../axiosConfig";
 
 function Search(props) {
     const apiKey = process.env.REACT_APP_API_KEY;
@@ -34,12 +35,28 @@ function Search(props) {
         })
     }
 
+    function addGrocery(grocery) {
+        grocery.username = grocery.id;
+        grocery.count = 1; 
+        axios.get("https://api.spoonacular.com/food/ingredients/" + grocery.id + "/information?apiKey=" + apiKey + "&amount=1")
+            .then(res => {
+            grocery.cost = parseFloat(res.data.estimatedCost) / 100;
+        });
+        console.log(grocery);
+        axios.post("http://localhost:5000/addGrocery", grocery, axiosConfig).then(res => {
+            props.showAddedGrocery(res.data);
+            console.log("Successfully added grocery")
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     function showResults() {
         return (
             <ListGroup>
                 {Array.from(results).map(item => {
                     return (
-                        <SearchItem item={item} key={results.indexOf(item)}/>
+                        <SearchItem item={item} key={results.indexOf(item)} addGrocery={addGrocery}/>
                     )
                 })}
             </ListGroup>
@@ -47,8 +64,8 @@ function Search(props) {
     }
 
     return (
-        <div>
-            <form onSubmit={doSearch} style={{ width: '50vw' }}>
+        <div style={{width: '50%'}}>
+            <form onSubmit={doSearch}>
                 <InputGroup className="mb-3 d-flex align-items-center" value={search} onChange={(event) => suggest(event.target.value)}>
                     
                     <InputGroup.Text>
