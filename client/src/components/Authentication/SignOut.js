@@ -18,7 +18,7 @@ function SignOut(props) {
     }
 
     return (
-        <Button className="btn btn-light position-absolute mb-5 bottom-0" onClick={signOut}>
+        <Button className="btn btn-light position-absolute mb-5 bottom-0" style={{backgroundColor: '#a7d1e7'}} onClick={signOut}>
             Sign Out
         </Button>
     );
