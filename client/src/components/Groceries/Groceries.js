@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ListGroup } from 'react-bootstrap';
 import NavBar from '../NavBar';
 import Search from './Search';
-import GroceryList from './GroceryList';
 import GroceryItem from './GroceryItem';
 import axios from 'axios';
 import axiosConfig from "../../axiosConfig";
@@ -37,9 +35,12 @@ function Groceries(props) {
                 <Search showAddedGrocery={addToGroceryList}/>
                 <div className='w-100 h-100 rounded' style={{marginLeft: '2em', backgroundColor: "white", padding: '35px'}}>
                     <h3>Your Groceries</h3>
-                    {groceries.map(g => 
-                        <GroceryItem groceryItem={g} key={groceries.indexOf(g)} />
-                    )}
+                    <div className="d-flex flex-wrap">
+                        {groceries.map(g => 
+                            <GroceryItem groceryItem={g} key={groceries.indexOf(g)} />
+                        )}
+                    </div>
+                    
                 </div>
             </div>
         </div>

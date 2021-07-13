@@ -8,7 +8,7 @@ const grocerySchema = new mongoose.Schema ({
     aisle: String,
     cost: Number,
     count: Number,
-    img: String,
+    image: String,
     username: Number
 });
 

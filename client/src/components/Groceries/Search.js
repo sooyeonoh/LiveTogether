@@ -36,19 +36,17 @@ function Search(props) {
     }
 
     function addGrocery(grocery) {
-        grocery.username = grocery.id;
         grocery.count = 1; 
-        axios.get("https://api.spoonacular.com/food/ingredients/" + grocery.id + "/information?apiKey=" + apiKey + "&amount=1")
+        axios.get("https://api.spoonacular.com/food/ingredients/" + grocery.id + "/information?amount=1000&unit=g&apiKey=" + apiKey)
             .then(res => {
-            grocery.cost = parseFloat(res.data.estimatedCost) / 100;
+                grocery.cost = (parseFloat(res.data.estimatedCost.value) / 100).toFixed(2);
+                axios.post("http://localhost:5000/addGrocery", grocery, axiosConfig).then(res => {
+                    props.showAddedGrocery(res.data);
+                    console.log("Successfully added grocery")
+                }).catch(err => {
+                    console.log(err);
+                })
         });
-        console.log(grocery);
-        axios.post("http://localhost:5000/addGrocery", grocery, axiosConfig).then(res => {
-            props.showAddedGrocery(res.data);
-            console.log("Successfully added grocery")
-        }).catch(err => {
-            console.log(err);
-        })
     }
 
     function showResults() {
@@ -75,7 +73,7 @@ function Search(props) {
                         placeholder="Search for items"
                         aria-label="Search bar"
                     />
-                    <Button variant="outline-secondary" onClick={doSearch}>Search</Button>
+                    <Button variant="secondary" style={{backgroundColor: '#fb6c70'}} onClick={doSearch}>Search</Button>
                 </InputGroup>
             </form>
             {search !== "" && results !== [] && showResults()}

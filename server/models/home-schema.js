@@ -7,10 +7,7 @@ const homeSchema = new mongoose.Schema ({
         type: mongoose.Types.ObjectId,
         ref: 'User'
     }],
-    groceries: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'Grocery'
-    }],
+    groceries: [Object],
     username: String
 });
 
