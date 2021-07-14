@@ -36,16 +36,16 @@ function Dashboard(props) {
         <div className="view">
             <NavBar userID={userID} history={props.history}/>
             <div className="main-padding">
-                <Jumbotron style={{backgroundColor: "lightgray"}} className="d-flex justify-content-between align-items-center card-padding rounded">
+                <Jumbotron style={{backgroundColor: "white"}} className="d-flex justify-content-between align-items-center card-padding rounded">
                     <div>
                         <h1>Welcome back, {user.fName}</h1>
                         <p style={{fontSize: '18px', margin: '0'}}>
                             Today is {days[today.getDay()]}, {months[today.getMonth()]} {today.getDate()}
                         </p>
                     </div>
-                    <Button variant="primary">See today's updates</Button>
+                    <button className="border-0 p-2" style={{width: '200px',height: '40px', color: 'white', backgroundColor: '#fb6c70', borderRadius: '20px'}}>See today's updates</button>
                 </Jumbotron>
-                <Container fluid>
+                <Container fluid className="p-0">
                     <Row className="d-flex justify-content-around flex-wrap">
                         <Col><Roommates/></Col>
                         <Col><Tasks/></Col>

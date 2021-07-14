@@ -4,13 +4,27 @@ module.exports = function(app){
     const Home = require("../models/home-schema");
 
     app.post("/addGrocery", (req, res) => {
-        Home.findOneAndUpdate({"users": mongoose.Types.ObjectId(req.session.user._id)}, { "$push": { "groceries": req.body } }, (err, home) => {
+        Home.findOne({"users": mongoose.Types.ObjectId(req.session.user._id)}, (err, home) => {
             if (!home) {
                 console.log("Home not found for user");
             } else {
                 console.log("Adding grocery: " + req.body.name);
-                console.log(req.body);
-                res.send(req.body);
+                home.groceries.push(req.body);
+                home.save();
+                res.send(home.groceries);
+            }
+        });
+    });
+
+    app.post("/removeGrocery", (req, res) => {
+        Home.findOne({"users": mongoose.Types.ObjectId(req.session.user._id)}, (err, home) => {
+            if (!home) {
+                console.log("Home not found for user");
+            } else {
+                console.log("Removing grocery: " + req.body.name);
+                home.groceries = home.groceries.filter(item => item.name !== req.body.name); 
+                home.save();
+                res.send(home.groceries);
             }
         });
     });

@@ -23,8 +23,17 @@ function Groceries(props) {
         fetch();
     }, [userID]);
 
-    function addToGroceryList(grocery) {
-        setGroceries([...groceries, grocery])
+    function updateGroceryList(list) {
+        setGroceries(list)
+    }
+
+    function removeGrocery(grocery) {
+        axios.post("http://localhost:5000/removeGrocery", grocery, axiosConfig).then(res => {
+            setGroceries(res.data);
+            console.log("Successfully removed grocery")
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     return (
@@ -32,12 +41,12 @@ function Groceries(props) {
         <div className="view">
             <NavBar userID={userID} history={props.history}/>
             <div className="main-padding d-flex justify-content-between align-items-start" >
-                <Search showAddedGrocery={addToGroceryList}/>
+                <Search updateGroceryList={setGroceries}/>
                 <div className='w-100 h-100 rounded' style={{marginLeft: '2em', backgroundColor: "white", padding: '35px'}}>
                     <h3>Your Groceries</h3>
-                    <div className="d-flex flex-wrap">
+                    <div className="d-flex flex-wrap" style={{overflow: 'scroll'}}>
                         {groceries.map(g => 
-                            <GroceryItem groceryItem={g} key={groceries.indexOf(g)} />
+                            <GroceryItem groceryItem={g} remove={removeGrocery} key={groceries.indexOf(g)} />
                         )}
                     </div>
                     

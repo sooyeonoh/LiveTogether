@@ -41,7 +41,7 @@ function Search(props) {
             .then(res => {
                 grocery.cost = (parseFloat(res.data.estimatedCost.value) / 100).toFixed(2);
                 axios.post("http://localhost:5000/addGrocery", grocery, axiosConfig).then(res => {
-                    props.showAddedGrocery(res.data);
+                    props.updateGroceryList(res.data);
                     console.log("Successfully added grocery")
                 }).catch(err => {
                     console.log(err);
@@ -62,7 +62,7 @@ function Search(props) {
     }
 
     return (
-        <div style={{width: '50%'}}>
+        <div style={{width: '60%'}}>
             <form onSubmit={doSearch}>
                 <InputGroup className="mb-3 d-flex align-items-center" value={search} onChange={(event) => suggest(event.target.value)}>
                     
