@@ -7,7 +7,7 @@ function SearchItem(props) {
     return (
         <ListGroup.Item className="d-flex justify-content-between">
             {props.item.name}
-            <AddIcon onClick={() => props.addGrocery(props.item)}/>
+            <AddIcon id="addicon" onClick={() => props.addGrocery(props.item)}/>
         </ListGroup.Item>
     );
 }

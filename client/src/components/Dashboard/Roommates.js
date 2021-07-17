@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import axiosConfig from "../../axiosConfig";
 import { Card, ListGroup, Button, Form, Row, Col } from "react-bootstrap";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import RoommateItem from "./RoommateItem";
 
 function Roommates(props) {
@@ -33,7 +35,7 @@ function Roommates(props) {
     function addRoommate(event) {
         event.preventDefault();
         axios.post("http://localhost:5000/addRoommate", roommate, axiosConfig).then(res => {
-            setRoommateList(prevList => [...prevList, res.data._id]);
+            setRoommateList(prevList => [...prevList, res.data]);
             console.log("Successfully added roommate")
         }).catch(err => {
             console.log(err);
@@ -46,16 +48,17 @@ function Roommates(props) {
         });
     }
 
-    const [addToggle, setAddToggle] = useState({
-        add: false,
-        button: '+'
-    });
-
-    function toggleAdd() {
-        setAddToggle({
-            add: !addToggle.add, 
-            button: addToggle.button === '+' ? '-' : '+'});
+    function sendTask(recipient) {
+        axios.post("http://localhost:5000/sendTask", recipient, axiosConfig).then(res => {
+            
+        }).catch(err => {
+            console.log(err);
+        })
     }
+
+    const [adding, setAddToggle] = useState(false);
+
+    function toggleAdd() { setAddToggle(!adding) }
 
     function showInput() {
         return (
@@ -77,20 +80,27 @@ function Roommates(props) {
     }
 
     return (
-        <Card className="text-center rounded mt-4 mr-4">
-            <Card.Header><h5>Your roommates</h5></Card.Header>
-            <ListGroup variant="flush">
-                {roommateList.map(r => {
-                    return (
-                        <RoommateItem roommateItem={r} key={roommateList.indexOf(r)} />
-                    )
-                })}
-                <ListGroup.Item>
-                    {addToggle.add && showInput()}
-                    <Button onClick={toggleAdd} variant="outline-secondary" className="rounded m-1">{addToggle.button}</Button>
-                </ListGroup.Item>
-            </ListGroup>
-        </Card>
+        <div className='panel d-flex flex-column justify-content-between'>
+            <div>
+                <h5>Your Home</h5>
+                <ListGroup variant="flush">
+                    <ListGroup.Item></ListGroup.Item>
+                    {roommateList.map(r =>
+                        <ListGroup.Item className="pt-3 pb-3" key={roommateList.indexOf(r)}>
+                            <RoommateItem roommateItem={r} sendTask={sendTask}/>
+                        </ListGroup.Item>
+                    )}
+                    <ListGroup.Item></ListGroup.Item>
+                </ListGroup>
+            </div>
+            <div>
+                {adding && showInput()}
+                <div className="m-auto d-flex justify-content-end">
+                    {adding === true ? <RemoveCircleIcon id="buttonicon" onClick={toggleAdd} /> : <AddCircleIcon id="buttonicon" onClick={toggleAdd}/>}
+                </div>
+            </div>
+        </div>
+        
     );
 }
 

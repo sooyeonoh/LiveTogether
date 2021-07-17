@@ -1,5 +1,4 @@
 import React from 'react';
-import { ListGroup } from "react-bootstrap";
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
@@ -12,12 +11,12 @@ function TaskItem(props) {
 
     return (
         <div>
-            <ListGroup.Item className="text-left">
-                {props.taskItem.completed ? <CheckBoxIcon className="m-1"/>
-                : <CheckBoxOutlineBlankIcon onClick={markComplete} className="m-1"/>
-                }
+            {props.taskItem.completed ? <CheckBoxIcon className="d-inline"/>
+            : <CheckBoxOutlineBlankIcon className="d-inline" onClick={markComplete}/>
+            }
+            <div className="d-inline" style={{marginLeft: '1rem'}}>
                 {props.taskItem.task}
-            </ListGroup.Item>
+            </div>
         </div>
     );
 }

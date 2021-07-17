@@ -1,5 +1,6 @@
 module.exports = function(app){
 
+    var mongoose = require('mongoose');
     const User = require("../models/user-schema");
     const Home = require("../models/home-schema");
 
@@ -18,7 +19,7 @@ module.exports = function(app){
         var userID = req.session.user._id;
         User.findById(userID, (err, user) => {
             User.findOne({email: roommateEmail}, (err, roommate) => {
-                Home.findOneAndUpdate({"users": {$elemMatch: {_id: userID}}}, { "$push": { "users": roommate } }, (err, home) => {
+                Home.findOneAndUpdate({"users": mongoose.Types.ObjectId(userID)}, { "$push": { "users": roommate } }, (err, home) => {
                     if (!home) {
                         console.log("Home not found for user");
                     } else {
@@ -29,10 +30,14 @@ module.exports = function(app){
                         console.log("Adding roommate: " + roommate.fName);
                     }
                 });
-                Home.findOneAndDelete({users:{$elemMatch:{_id: roommate._id}}});
+                Home.findOneAndDelete({"users": mongoose.Types.ObjectId(roommate._id)});
                 res.send(roommate);
             })
         }) 
+    })
+
+    app.post("/sendTask", (req, res) => {
+        console.log(req.body);
     })
 
 }

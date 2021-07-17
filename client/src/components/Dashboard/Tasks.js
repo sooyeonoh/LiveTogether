@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import { Card, Form, Row, Col, ListGroup, Button } from "react-bootstrap";
+import { Form, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
 import axiosConfig from "../../axiosConfig";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import TaskItem from "./TaskItem";
 
 function Tasks(props) {
@@ -55,16 +57,9 @@ function Tasks(props) {
         })
     }
 
-    const [addToggle, setAddToggle] = useState({
-        add: false,
-        button: '+'
-    });
+    const [adding, setAddToggle] = useState(false);
 
-    function toggleAdd() {
-        setAddToggle({
-            add: !addToggle.add, 
-            button: addToggle.button === '+' ? '-' : '+'});
-    }
+    function toggleAdd() { setAddToggle(!adding) }
 
     function showInput() {
         return (
@@ -86,18 +81,20 @@ function Tasks(props) {
     }
 
     return (
-        <Card className="text-center rounded mt-4 mr-4">
-            <Card.Header><h5>Upcoming Tasks</h5></Card.Header>
-            <ListGroup variant="flush">
+        <div className='panel mr-3 d-flex flex-column justify-content-between'>
+            <h5>Upcoming Tasks</h5>
+            <div className="d-flex flex-wrap">
                 {taskList.map(t => 
                     <TaskItem taskItem={t} key={taskList.indexOf(t)} remove={removeTask}/>
                 )}
-                <ListGroup.Item>
-                        {addToggle.add && showInput()}
-                        <Button onClick={toggleAdd} variant="outline-secondary" className="rounded m-1">{addToggle.button}</Button>
-                    </ListGroup.Item>
-            </ListGroup>
-        </Card>
+            </div>
+            <div>
+                {adding && showInput()}
+                <div className="m-auto d-flex justify-content-end">
+                    {adding === true ? <RemoveCircleIcon id="buttonicon" onClick={toggleAdd} /> : <AddCircleIcon id="buttonicon" onClick={toggleAdd}/>}
+                </div>
+            </div>
+        </div>
     );
 }
 

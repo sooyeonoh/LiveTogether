@@ -73,7 +73,7 @@ function Search(props) {
                         placeholder="Search for items"
                         aria-label="Search bar"
                     />
-                    <Button variant="secondary" style={{backgroundColor: '#fb6c70'}} onClick={doSearch}>Search</Button>
+                    <Button variant="secondary" style={{backgroundColor: '#a7d1e7'}} onClick={doSearch}>Search</Button>
                 </InputGroup>
             </form>
             {search !== "" && results !== [] && showResults()}
