@@ -4,8 +4,7 @@ const findOrCreate = require('mongoose-findorcreate');
 
 const taskSchema = new mongoose.Schema ({
     task: String,
-    isComplete: Boolean,
-    username: Number
+    isComplete: Boolean
 });
 
 taskSchema.plugin(passportLocalMongoose);

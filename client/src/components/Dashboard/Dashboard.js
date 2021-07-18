@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BarChart } from 'recharts';
 import axiosConfig from "../../axiosConfig";
 import NavBar from '../NavBar';
 import Roommates from './Roommates';
 import Tasks from './Tasks';
-import { Container, Jumbotron, Button, Row, Col } from "react-bootstrap";
+import TaskTracker from './TaskTracker';
+import { Container, Jumbotron, Row, Col } from "react-bootstrap";
 
 function Dashboard(props) {
 
@@ -48,18 +48,14 @@ function Dashboard(props) {
                         <button className="border-0 p-2" style={{width: '200px',height: '40px', color: 'white', backgroundColor: '#fb6c70', borderRadius: '20px'}}>See today's updates</button>
                     </Jumbotron>
                 </Container>
-                <Container fluid className="p-0 mt-4">
+                <Container className="p-0 mt-3">
                     <Row className="d-flex justify-content-around flex-wrap">
-                        <Col xs={8}><Tasks/></Col>
-                        <Col><Roommates/></Col>
+                        <Col style={{maxHeight: '35vh'}} xs={8}><Tasks/></Col>
+                        <Col style={{maxHeight: '35vh'}}><Roommates/></Col>
                     </Row>
                 </Container>
                 <Container fluid className="p-0">
-                    <div className='panel mt-4 d-flex flex-column justify-content-between'>
-                        <div>
-                            <h5>Task Tracker</h5>
-                        </div>
-                    </div>
+                    <TaskTracker/>
                 </Container>
             </div>
         </div>

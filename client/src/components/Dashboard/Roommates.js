@@ -48,8 +48,8 @@ function Roommates(props) {
         });
     }
 
-    function sendTask(recipient) {
-        axios.post("http://localhost:5000/sendTask", recipient, axiosConfig).then(res => {
+    function sendTask(recipient, task) {
+        axios.post("http://localhost:5000/sendTask", {recipient: recipient, task: task}, axiosConfig).then(res => {
             
         }).catch(err => {
             console.log(err);
@@ -83,7 +83,7 @@ function Roommates(props) {
         <div className='panel d-flex flex-column justify-content-between'>
             <div>
                 <h5>Your Home</h5>
-                <ListGroup variant="flush">
+                <ListGroup variant="flush" style={{overflow: '40vh'}}>
                     <ListGroup.Item></ListGroup.Item>
                     {roommateList.map(r =>
                         <ListGroup.Item className="pt-3 pb-3" key={roommateList.indexOf(r)}>

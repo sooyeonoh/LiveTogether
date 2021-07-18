@@ -3,6 +3,7 @@ module.exports = function(app){
     var mongoose = require('mongoose');
     const User = require("../models/user-schema");
     const Home = require("../models/home-schema");
+    const Task = require("../models/task-schema");
 
     app.get("/getRoommates", (req, res) => {
         User.findById(req.session.user._id, (err, user) => {
@@ -37,7 +38,15 @@ module.exports = function(app){
     })
 
     app.post("/sendTask", (req, res) => {
-        console.log(req.body);
+        User.findById(req.body.recipient._id, (err, user) => {
+            taskToSend = req.body;
+            const newTask = new Task(taskToSend);
+            newTask.save();
+            user.tasks.push(newTask);
+            user.save();
+            console.log("Sending task: " + taskToSend.task);
+            res.send(taskToSend);
+        }) 
     })
 
 }

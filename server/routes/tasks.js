@@ -2,6 +2,7 @@ module.exports = function(app){
 
     const Task = require("../models/task-schema");
     const User = require("../models/user-schema");
+    const Home = require("../models/home-schema");
 
     app.get("/getTasks", (req, res) => {
         User.findById(req.session.user._id, (err, user) => {
@@ -15,8 +16,7 @@ module.exports = function(app){
     app.post("/addTask", (req, res) => {
     const taskToAdd = {
         task: req.body.task,
-        completed: req.body.completed,
-        username: req.body.username
+        completed: req.body.completed
     }
     User.findById(req.session.user._id, (err, foundUser) => {
         const newTask = new Task(taskToAdd);
@@ -37,9 +37,19 @@ module.exports = function(app){
         foundUser.save();
     }).then(
         Task.findByIdAndRemove(completedTask._id, (err, removed) => {
-        res.send({message: "Task removed successfully"});
+            res.send({message: "Task removed successfully"});
         })
     )
+    })
+
+    app.get("/getTaskData", (req, res) => {
+        Home.findOne({"users": mongoose.Types.ObjectId(req.session.user._id)}, (err, home) => {
+            if (!home) {
+                console.log("Home not found for user");
+            } else {
+                
+            }
+        });
     })
 
 }

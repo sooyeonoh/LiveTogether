@@ -10,8 +10,7 @@ function Tasks(props) {
 
     const [newTask, setNewTask] = useState({
         task: "",
-        completed: false,
-        username: -1
+        completed: false
     });
     const [taskList, setTaskList] = useState([]);
 
@@ -26,8 +25,7 @@ function Tasks(props) {
     function handleChange(event) {
         setNewTask({
             task: event.target.value,
-            completed: false,
-            username: taskList.length
+            completed: false
         });
     }
 
@@ -42,8 +40,7 @@ function Tasks(props) {
         toggleAdd();
         setNewTask({
             task: "",
-            completed: false,
-            username: -1
+            completed: false
         });
     }
 
@@ -82,11 +79,13 @@ function Tasks(props) {
 
     return (
         <div className='panel mr-3 d-flex flex-column justify-content-between'>
-            <h5>Upcoming Tasks</h5>
-            <div className="d-flex flex-wrap">
-                {taskList.map(t => 
-                    <TaskItem taskItem={t} key={taskList.indexOf(t)} remove={removeTask}/>
-                )}
+            <div>
+                <h5>Upcoming Tasks</h5>
+                <div className="d-flex flex-column flex-wrap pt-2" style={{overflow: '40vh'}}>
+                    {taskList.map(t => 
+                        <TaskItem taskItem={t} key={taskList.indexOf(t)} remove={removeTask}/>
+                    )}
+                </div>
             </div>
             <div>
                 {adding && showInput()}
